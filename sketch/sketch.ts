@@ -11,6 +11,7 @@ function windowResized() {
 let r: Renderer;
 
 function draw() {
+    frameRate(0);
     background(200);
     r =  new Renderer();
     r.render();

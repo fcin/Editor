@@ -20,6 +20,6 @@ class Renderer
     {
         var hit = this.tracer.trace(position);
         if(hit !== null)
-            console.log(hit.position);
+            hit.highlight();
     }
 }
