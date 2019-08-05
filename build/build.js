@@ -51,6 +51,9 @@ class Renderer {
     render() {
         this.geometries.forEach(element => {
             element.display();
+            if (element.isHighlighted) {
+                element.highlight();
+            }
         });
     }
     onMouseClicked(position) {
@@ -58,28 +61,37 @@ class Renderer {
         if (hit !== null)
             hit.highlight();
     }
+    onMouseDragged(position) {
+        this.geometries.filter(geom => geom.isHighlighted).forEach(geom => {
+            geom.setPosition(position);
+        });
+    }
 }
+let renderer;
 function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
+    renderer = new Renderer();
 }
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
-let r;
 function draw() {
-    frameRate(0);
+    frameRate(30);
     background(200);
-    r = new Renderer();
-    r.render();
+    renderer.render();
 }
 function mouseClicked() {
-    r.onMouseClicked(new Point2D(mouseX, mouseY));
+    renderer.onMouseClicked(new Point2D(mouseX, mouseY));
+}
+function mouseDragged() {
+    renderer.onMouseDragged(new Point2D(mouseX, mouseY));
 }
 class Plane extends Geometry {
     constructor(position, size) {
         super(position);
         this.position = position;
         this.size = size;
+        this.isHighlighted = false;
     }
     display() {
         let translateX = this.position.x + (this.size.x / 2) - width / 2;
@@ -99,15 +111,24 @@ class Plane extends Geometry {
         return false;
     }
     highlight() {
-        console.log('HIGHLIGHT');
-        let borderSize = 4;
-        push();
-        let x = this.position.x - this.size.x - borderSize / 4;
-        let y = this.position.y - this.size.y;
-        translate(x, y, -1);
-        ambientMaterial(70, 130, 230);
-        plane(this.size.x + borderSize, this.size.y + borderSize);
-        pop();
+        if (this.isHighlighted === false)
+            this.isHighlighted = true;
+        if (this.isHighlighted) {
+            let borderSize = 4;
+            push();
+            let x = this.position.x - this.size.x - borderSize / 4;
+            let y = this.position.y - this.size.y;
+            applyMatrix(1, 1, 0, 0, 0, 0);
+            ambientMaterial(70, 130, 230);
+            plane(this.size.x + borderSize, this.size.y + borderSize);
+            pop();
+        }
+    }
+    setPosition(position) {
+        if (this.isHighlighted) {
+            this.position.x = position.x;
+            this.position.y = position.y;
+        }
     }
 }
 //# sourceMappingURL=build.js.map

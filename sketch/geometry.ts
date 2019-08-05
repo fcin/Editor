@@ -1,5 +1,6 @@
 abstract class Geometry {
     position = new Point3D(0, 0, 0);
+    isHighlighted: boolean;
 
     constructor(position: Point3D) {
         this.position = position;
@@ -8,6 +9,7 @@ abstract class Geometry {
     abstract display(): void;
     abstract intersects(point: Point2D): boolean;
     abstract highlight(): void;
+    abstract setPosition(position: Point2D) : void;
 }
 
 class Point2D {

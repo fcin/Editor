@@ -1,22 +1,25 @@
 
+let renderer: Renderer;
+
 function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL)
-
+    renderer =  new Renderer();
 }
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
 
-let r: Renderer;
-
 function draw() {
-    frameRate(0);
+    frameRate(30);
     background(200);
-    r =  new Renderer();
-    r.render();
+    renderer.render();
 }
 
 function mouseClicked() {
-    r.onMouseClicked(new Point2D(mouseX, mouseY));
+    renderer.onMouseClicked(new Point2D(mouseX, mouseY));
 }
+
+function mouseDragged() {
+    renderer.onMouseDragged(new Point2D(mouseX, mouseY));
+  }
