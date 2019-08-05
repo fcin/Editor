@@ -46,6 +46,8 @@ class Renderer {
         this.geometries = [];
         let p = new Plane(new Point3D(50, 50, 0), new Point2D(50, 50));
         this.geometries.push(p);
+        let p2 = new Plane(new Point3D(70, 70, 0), new Point2D(50, 50));
+        this.geometries.push(p2);
         this.tracer = new RayTracer(this.geometries);
     }
     render() {
@@ -57,9 +59,16 @@ class Renderer {
         });
     }
     onMouseClicked(position) {
-        var hit = this.tracer.trace(position);
-        if (hit !== null)
-            hit.highlight();
+        if (!this.geometries.some(geom => geom.isHighlighted)) {
+            var hit = this.tracer.trace(position);
+            if (hit !== null)
+                hit.highlight();
+            else
+                this.geometries.forEach(geom => geom.isHighlighted = false);
+        }
+        else {
+            this.geometries.forEach(geom => geom.isHighlighted = false);
+        }
     }
     onMouseDragged(position) {
         this.geometries.filter(geom => geom.isHighlighted).forEach(geom => {
@@ -97,10 +106,13 @@ class Plane extends Geometry {
         let translateX = this.position.x + (this.size.x / 2) - width / 2;
         let translateY = this.position.y + (this.size.y / 2) - height / 2;
         let translateZ = this.position.z;
+        push();
         translate(translateX, translateY, translateZ);
+        applyMatrix(0, 1, 1, 0, 0, 0);
         ambientMaterial(120, 150, 255);
         ambientLight(255, 0, 0);
         plane(this.size.x, this.size.y);
+        pop();
     }
     intersects(point) {
         if (point.x >= this.position.x && point.x <= this.position.x + this.size.x) {
@@ -118,7 +130,11 @@ class Plane extends Geometry {
             push();
             let x = this.position.x - this.size.x - borderSize / 4;
             let y = this.position.y - this.size.y;
-            applyMatrix(1, 1, 0, 0, 0, 0);
+            let translateX = this.position.x + (this.size.x / 2) - width / 2;
+            let translateY = this.position.y + (this.size.y / 2) - height / 2;
+            let translateZ = this.position.z;
+            translate(translateX, translateY, translateZ - 1);
+            applyMatrix(0, 1, 1, 0, 0, 0);
             ambientMaterial(70, 130, 230);
             plane(this.size.x + borderSize, this.size.y + borderSize);
             pop();
