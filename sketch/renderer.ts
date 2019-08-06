@@ -5,7 +5,7 @@ class Renderer {
     constructor() {
         let p: Plane = new Plane(new Point3D(50, 50, 0), new Point2D(50, 50));
         this.geometries.push(p);
-        let p2: Plane = new Plane(new Point3D(70, 70, 0), new Point2D(50, 50));
+        let p2: Plane = new Plane(new Point3D(70, 70, -1), new Point2D(50, 50));
         this.geometries.push(p2);
         this.tracer = new RayTracer(this.geometries);
     }
