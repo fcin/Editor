@@ -48,7 +48,7 @@ class Plane extends Geometry {
             let translateZ = this.position.z;
             translate(translateX, translateY, translateZ - 1);
             applyMatrix(0, 1, 1, 0, 0, 0);
-            ambientMaterial(70, 130, 230);
+            color(70, 130, 230);
             plane(this.size.x + borderSize, this.size.y + borderSize);
             pop();
         }
