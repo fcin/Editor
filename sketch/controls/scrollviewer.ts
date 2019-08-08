@@ -1,4 +1,8 @@
-class ScrollViewer {
+import { Scrollbar } from "./scrollbar";
+import { Point2D } from "../geometry";
+import { Consts } from "../sketch";
+
+export class ScrollViewer {
     position: Point2D;
     size: Point2D;
     scrollbar: Scrollbar;
@@ -10,10 +14,10 @@ class ScrollViewer {
     }
 
     display() : void {
-        push();
-        fill('#333');
-        rect(this.position.x, this.position.y, this.size.x, this.size.y);
-        pop();
+        Consts.p.push();
+        Consts.p.fill('#333');
+        Consts.p.rect(this.position.x, this.position.y, this.size.x, this.size.y);
+        Consts.p.pop();
         this.scrollbar.display();
     }
 }

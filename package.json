@@ -1,19 +1,32 @@
 {
-  "name": "p5-typescript-starter",
-  "version": "1.0.0",
-  "description": "Project to quickly get something working in [p5.js](https://p5js.org/) and [typescript](https://www.typescriptlang.org/)",
+  "name": "editor",
+  "version": "0.1.0",
+  "description": "Test project",
+  "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "run-p start-compile start-run",
-    "start-compile": "tsc --watch",
-    "start-run": "browser-sync start --server -w"
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
-  "homepage": "https://github.com/Gaweph/p5-typescript-starter#readme",
+  "keywords": [
+    "p5js",
+    "boilerplate",
+    "typescript",
+    "parcel-bundler"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fcin/Editor.git"
+  },
+  "author": "Filip Cinik",
+  "license": "MIT",
+  "dependencies": {
+    "p5": "^0.7.2"
+  },
   "devDependencies": {
-    "@types/p5": "^0.7.3",
-    "npm-run-all": "^4.1.5",
-    "browser-sync": "^2.26.7",
-    "typescript": "^3.5.3",
-    "lodash": ">=4.17.13"
+    "@types/p5": "^0.7.2",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "parcel-bundler": "^1.12.3",
+    "typescript": "^3.4.4"
   }
 }

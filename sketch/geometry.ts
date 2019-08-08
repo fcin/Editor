@@ -1,4 +1,4 @@
-abstract class Geometry {
+export abstract class Geometry {
     position = new Point3D(0, 0, 0);
     isHighlighted: boolean;
 
@@ -12,7 +12,7 @@ abstract class Geometry {
     abstract setPosition(position: Point2D) : void;
 }
 
-class Point2D {
+export class Point2D {
     x: number = 0;
     y: number = 0;
 
@@ -22,7 +22,7 @@ class Point2D {
     }
 }
 
-class Point3D {
+export class Point3D {
     x: number = 0;
     y: number = 0;
     z: number = 0;

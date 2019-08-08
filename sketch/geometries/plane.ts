@@ -1,4 +1,7 @@
-class Plane extends Geometry {
+import { Point3D, Point2D, Geometry } from "../geometry";
+import { Consts } from "../sketch";
+
+export class Plane extends Geometry {
     position: Point3D;
     size: Point2D;
 
@@ -10,16 +13,16 @@ class Plane extends Geometry {
     }
 
     display(): void {
-        let translateX = this.position.x + (this.size.x / 2) - width / 2;
-        let translateY = this.position.y + (this.size.y / 2) - height / 2;
+        let translateX = this.position.x + (this.size.x / 2) - Consts.p.width / 2;
+        let translateY = this.position.y + (this.size.y / 2) - Consts.p.height / 2;
         let translateZ = this.position.z;
-        push();
-        translate(translateX, translateY, translateZ);
-        applyMatrix(0, 1, 1, 0, 0, 0);
-        ambientMaterial(120, 150, 255);
-        ambientLight(255, 0, 0);
-        plane(this.size.x, this.size.y);
-        pop();
+        Consts.p.push();
+        Consts.p.translate(translateX, translateY, translateZ);
+        //Consts.p.applyMatrix(0, 1, 1, 0, 0, 0);
+        Consts.p.ambientMaterial(120, 150, 255);
+        Consts.p.ambientLight(255, 0, 0);
+        Consts.p.plane(this.size.x, this.size.y);
+        Consts.p.pop();
     }
 
     intersects(point: Point2D): boolean {
@@ -40,17 +43,17 @@ class Plane extends Geometry {
         if (this.isHighlighted) {
             let borderSize = 4;
 
-            push();
+            Consts.p.push();
             let x = this.position.x - this.size.x - borderSize / 4;
             let y = this.position.y - this.size.y;
-            let translateX = this.position.x + (this.size.x / 2) - width / 2;
-            let translateY = this.position.y + (this.size.y / 2) - height / 2;
+            let translateX = this.position.x + (this.size.x / 2) - Consts.p.width / 2;
+            let translateY = this.position.y + (this.size.y / 2) - Consts.p.height / 2;
             let translateZ = this.position.z;
-            translate(translateX, translateY, translateZ - 1);
-            applyMatrix(0, 1, 1, 0, 0, 0);
-            color(70, 130, 230);
-            plane(this.size.x + borderSize, this.size.y + borderSize);
-            pop();
+            Consts.p.translate(translateX, translateY, translateZ - 1);
+            //Consts.p.applyMatrix(0, 1, 1, 0, 0, 0);
+            Consts.p.color(70, 130, 230);
+            Consts.p.plane(this.size.x + borderSize, this.size.y + borderSize);
+            Consts.p.pop();
         }
     }
 

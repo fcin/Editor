@@ -1,4 +1,7 @@
-abstract class CollapsablePanel {
+import { Point2D } from "../geometry";
+import { CollapsableItem } from "./collapsableItem";
+
+export abstract class CollapsablePanel {
 
     protected position: Point2D;
     protected size: Point2D;

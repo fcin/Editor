@@ -1,4 +1,6 @@
-abstract class CollapsableItem {
+import { Point2D } from "../geometry";
+
+export abstract class CollapsableItem {
 
     public position: Point2D;
     public size: Point2D;

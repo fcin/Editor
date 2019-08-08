@@ -1,4 +1,7 @@
-class Scrollbar {
+import { Point2D } from "../geometry";
+import { Consts } from "../sketch";
+
+export class Scrollbar {
 
     position: Point2D;
     size: Point2D;
@@ -9,10 +12,10 @@ class Scrollbar {
     }
 
     display(): void {
-        push();
-        fill('#AA0AA0');
-        rect(this.position.x, this.position.y, 50, 10);
-        pop();
+        Consts.p.push();
+        Consts.p.fill('#AA0AA0');
+        Consts.p.rect(this.position.x, this.position.y, 50, 10);
+        Consts.p.pop();
     }
 
     setMaxHeight(height: number) {

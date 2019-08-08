@@ -1,4 +1,8 @@
-class TimelineItem extends CollapsableItem {
+import { Point2D } from "../geometry";
+import { CollapsableItem } from "../abstractions/collapsableItem";
+import { Consts } from "../sketch";
+
+export class TimelineItem extends CollapsableItem {
 
     name: string;
 
@@ -12,16 +16,16 @@ class TimelineItem extends CollapsableItem {
 
     display(): void {
         const fontSize = 18;
-        push();
-        fill('#EEE');
-        rect(this.position.x, this.position.y, this.size.x, this.size.y);
+        Consts.p.push();
+        Consts.p.fill('#EEE');
+        Consts.p.rect(this.position.x, this.position.y, this.size.x, this.size.y);
 
-        fill('#000');
-        textSize(fontSize);
-        textFont(Consts.basicFont);
-        textAlign(LEFT, BOTTOM);
-        text(this.name, this.position.x + 10, this.position.y + fontSize);
-        pop();
+        Consts.p.fill('#000');
+        Consts.p.textSize(fontSize);
+        Consts.p.textFont(Consts.basicFont);
+        Consts.p.textAlign(Consts.p.LEFT, Consts.p.BOTTOM);
+        Consts.p.text(this.name, this.position.x + 10, this.position.y + fontSize);
+        Consts.p.pop();
     }
     
     move(position: Point2D) : void

@@ -1,4 +1,6 @@
-class RayTracer {
+import { Point2D, Geometry } from "./geometry";
+
+export class RayTracer {
 
     private readonly geometries : Geometry[];
 
