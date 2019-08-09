@@ -1,11 +1,13 @@
 import { Renderer } from "./renderer";
 import { Point2D } from "./geometry";
 import p5 from 'p5'
+import { EventEmitter } from "events";
 
 export class Consts {
     static basicFont : p5.Font;
     static canvasCenter: Point2D;
     static p: p5;
+    static mediator: EventEmitter;
 }
 
 var sketch = (p: p5) => {
@@ -13,6 +15,7 @@ var sketch = (p: p5) => {
 
     p.preload = () => {
         Consts.p = p;
+        Consts.mediator = new EventEmitter();
         Consts.basicFont = p.loadFont(
           "https://cdnjs.cloudflare.com/ajax/libs/topcoat/0.8.0/font/SourceCodePro-Bold.otf"
         );
@@ -40,11 +43,11 @@ var sketch = (p: p5) => {
     
     p.mouseClicked = () => {
         renderer.onMouseClicked(new Point2D(p.mouseX, p.mouseY));
-        console.log(p.mouseX);
     }
     
     p.mouseDragged = () => {
         renderer.onMouseDragged(new Point2D(p.mouseX, p.mouseY));
+        Consts.mediator.emit('onMouseDragged', new Point2D(p.mouseX, p.mouseY));
       }
     
 }
