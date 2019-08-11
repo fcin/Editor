@@ -24,4 +24,12 @@ export class Timeline extends CollapsablePanel {
 
         this.items.forEach(item => item.display());
     }
+
+    setPosition(position: Point2D): void {
+        this.position = position;
+    }
+
+    scroll(amount: Point2D): void {
+        throw new Error("Method not implemented.");
+    }
 }

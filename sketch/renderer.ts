@@ -20,10 +20,10 @@ export class Renderer {
         this.geometries.push(p2);
         this.tracer = new RayTracer(this.geometries);
         this.timeline = new Timeline(new Point2D(-Consts.p.width/2, Consts.p.height/2 - 100), new Point2D(Consts.p.width, 100));
-        let item1 = new TimelineItem("plane1", new Point2D(0, 0), new Point2D(100, 50));
+        let item1 = new TimelineItem("plane1", new Point2D(0, 0), new Point2D(100, 50), this.timeline);
         this.timeline.addItem(item1);
         this.scrollviewer = new ScrollViewer(new Point2D(0, 0), new Point2D(50, 50));
-        console.log(this.scrollviewer.position);
+        this.scrollviewer.addItem(item1);
     }
 
     render(): void {
